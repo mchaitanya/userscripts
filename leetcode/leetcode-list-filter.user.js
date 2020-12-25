@@ -61,10 +61,7 @@
 
         const problems = document.querySelectorAll('.question');
         for (let p of problems) {
-            p.hidden = false;
-            if (!isMatched(p, status)) {
-                p.hidden = true;
-            }
+            p.hidden = !isMatched(p, status);
         }
     });
 
