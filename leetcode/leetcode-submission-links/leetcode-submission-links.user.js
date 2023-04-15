@@ -20,17 +20,17 @@
       for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         const link = row.querySelector("a");
-        const submissionId = link.href.split("detail/")[1];
+        if (!row.dataset.submissionId) {
+          row.dataset.submissionId = link.href.split("detail/")[1];
+        }
 
         const problem = row.cells[1].innerText.replaceAll(/[()]/g, "");
         const problemSlug = problem.toLowerCase().split(" ").join("-");
 
         // Rewrite the link.
         link.target = "_blank";
-        link.href = `https://leetcode.com/problems/${problemSlug}/submissions/${submissionId}`;
+        link.href = `https://leetcode.com/problems/${problemSlug}/submissions/${row.dataset.submissionId}`;
       }
-
-      observer.disconnect();
     }
   });
 
